@@ -9,7 +9,7 @@ namespace Facebook\Graph;
  */
 class Post
 {
-    private $postId;
+    private $id;
     private $from;
     private $to;
     private $message;
@@ -202,9 +202,9 @@ class Post
      * requires access token
      * @return string The post ID
      */
-    public function getPostId()
+    public function getId()
     {
-        return $this->postId;
+        return $this->id;
     }
 
     /**

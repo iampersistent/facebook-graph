@@ -17,8 +17,9 @@ class StatusMessage
 
     /**
      * The user who posted the message
+     *
      * permissions access_token
-     * @return Facebook\Graph\Owner containing id and name fields
+     * @return Facebook\Graph\Owner
      */
     public function getFrom()
     {
@@ -27,6 +28,7 @@ class StatusMessage
 
     /**
      * The status message ID
+     *
      * permissions access_token
      * @return string
      */
@@ -37,6 +39,7 @@ class StatusMessage
 
     /**
      * The status message content
+     *
      * permissions access_token
      * @return string
      */
@@ -47,6 +50,7 @@ class StatusMessage
 
     /**
      * The object type which is set to status
+     *
      * permissions access_token
      * @return string
      */
@@ -57,6 +61,7 @@ class StatusMessage
 
     /**
      * The time the message was published
+     * 
      * permissions access_token
      * @return string containing ISO-8601 date-time
      */

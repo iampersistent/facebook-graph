@@ -4,6 +4,8 @@
  */
 namespace Facebook\Tests;
 
+require_once __DIR__.'/../../../src/vendor/facebook-php-sdk/src/facebook.php';
+
 /**
  * @author Richard Shank <develop@zestic.com>
  */
@@ -14,7 +16,7 @@ class TestCommon extends \PHPUnit_Framework_TestCase
 
     protected function getFacebook()
     {
-        return new Facebook(array(
+        return new \Facebook(array(
             'appId'  => self::APP_ID,
             'secret' => self::SECRET,
         ));

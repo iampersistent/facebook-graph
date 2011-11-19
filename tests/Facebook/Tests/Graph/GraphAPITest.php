@@ -17,7 +17,7 @@ class GraphAPITest extends TestCommon
     {
         $graphAPI = $this->getGraphAPI();
 
-        $object = new Facebook\Tests\Fixtures\Annotation();
+        $object = new \Facebook\Tests\Fixtures\Annotation();
         $rc = new \ReflectionClass($object);
 
         $method = $rc->getMethod('noClass');

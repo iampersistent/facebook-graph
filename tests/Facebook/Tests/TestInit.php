@@ -20,6 +20,3 @@ $classLoader->register();
 
 $classLoader = new \Doctrine\Common\ClassLoader('Facebook\Tests', __DIR__ . '/../..');
 $classLoader->register();
-
-require_once __DIR__.'/../../../src/vendor/facebook-php-sdk/src/facebook.php';
-require_once __DIR__.'/../../../src/vendor/facebook-php-sdk/src/base_facebook.php';

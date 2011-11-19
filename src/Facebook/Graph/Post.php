@@ -38,6 +38,7 @@ class Post
 
     /**
      * A list of available actions on the post (including commenting, liking, and an optional app-specified action)
+     *
      * permissions access_token
      * @return array of objects containing the name and link
      */
@@ -48,6 +49,7 @@ class Post
 
     /**
      * Information about the application this post came from
+     *
      * permissions read_stream
      * @return object containing the name and id of the application
      */
@@ -58,7 +60,8 @@ class Post
 
     /**
      * The caption of the link (appears beneath the link name)
-     * permissions permissions access_token
+     *
+     * permissions access_token
      * @return string
      */
     public function getCaption()
@@ -68,6 +71,7 @@ class Post
 
     /**
      * Comments for this post
+     *
      * permissions read_stream
      * @return Structure containing a data object containing an array of objects, each with the id, from, message, and created_time for each comment
      */
@@ -78,6 +82,7 @@ class Post
 
     /**
      * The time the post was initially published
+     *
      * permissions read_stream
      * @return string containing ISO-8601 date-time
      */
@@ -88,6 +93,7 @@ class Post
 
     /**
      * A description of the link (appears beneath the link caption)
+     *
      * permissions access_token
      * @return string
      */
@@ -97,10 +103,10 @@ class Post
     }
 
     /**
-     *
      * Information about the user who posted the message
+     *
      * permissions access_token
-     * @returns object containing the name and Facebook id of the user who posted the message
+     * @return Facebook\Graph\Owner
      */
     public function getFrom()
     {
@@ -109,6 +115,7 @@ class Post
 
     /**
      * A link to an icon representing the type of this post
+     *
      * permissions access_token
      * @return string
      */
@@ -119,6 +126,7 @@ class Post
 
     /**
      * Likes for this post
+     *
      * permissions access_token
      * @return Structure containing a data object and the number of total likes, with data containing an array of objects, each with the name and Facebook id of the user who liked the post
      */
@@ -129,6 +137,7 @@ class Post
 
     /**
      * The link attached to this post
+     *
      * permissions access_token
      * @return string containing the URL
      */
@@ -139,6 +148,7 @@ class Post
 
     /**
      * The message
+     *
      * permissions access_token
      * @return string
      */
@@ -149,6 +159,7 @@ class Post
 
     /**
      * Objects tagged in the message (Users, Pages, etc)
+     *
      * permissions access_token
      * @return object containing fields whose names are the indexes to where objects are mentioned in the message field; each field in turn is an array containing an object with id, name, offset, and length fields, where length is the length, within the message field, of the object mentioned
      */
@@ -159,6 +170,7 @@ class Post
 
     /**
      * The name of the link
+     *
      * permissions access_token
      * @return string
      */
@@ -169,6 +181,7 @@ class Post
 
     /**
      * The Facebook object id for an uploaded photo or video
+     *
      * read_stream
      * @return number
      */
@@ -179,6 +192,7 @@ class Post
 
     /**
      * If available, a link to the picture included with this post
+     *
      * permissions access_token
      * @return string containing the URL
      */
@@ -189,6 +203,7 @@ class Post
 
     /**
      * Location associated with a Post, if any
+     *
      * permissions read_stream
      * @return object containing id and name of Page associated with this location, and a location field containing geographic information such as latitude, longitude, country, and other fields (fields will vary based on geography and availability of information)
      */
@@ -212,18 +227,12 @@ class Post
      * The privacy settings of the Post
      *
      * The value field may specify one of the following strings: EVERYONE, ALL_FRIENDS, NETWORKS_FRIENDS, FRIENDS_OF_FRIENDS, CUSTOM .
-
-    The friends field must be specified if value is set to CUSTOM and contain one of the following strings: EVERYONE, NETWORKS_FRIENDS (when the object can be seen by networks and friends), FRIENDS_OF_FRIENDS, ALL_FRIENDS, SOME_FRIENDS, SELF, or NO_FRIENDS (when the object can be seen by a network only).
-
-    The networks field may contain a comma-separated list of network IDs that can see the object, or 1 for all of a user's network.
-
-    The allow field must be specified when the friends value is set to SOME_FRIENDS and must specify a comma-separated list of user IDs and friend list IDs that 'can' see the post.
-
-    The deny field may be specified if the friends field is set to SOME_FRIENDS and must specify a comma-separated list of user IDs and friend list IDs that 'cannot' see the post.
-
-    Note: This privacy setting only applies to posts to the current or specified user's own Wall. Facebook ignores this setting for targeted Wall posts (when the user is writing on the Wall of a friend, Page, event, group connected to the user). Consistent with behavior on Facebook, all targeted posts are viewable by anyone who can see the target's Wall.
-
-    Privacy Policy: Any non-default privacy setting must be intentionally chosen by the user
+     * The friends field must be specified if value is set to CUSTOM and contain one of the following strings: EVERYONE, NETWORKS_FRIENDS (when the object can be seen by networks and friends), FRIENDS_OF_FRIENDS, ALL_FRIENDS, SOME_FRIENDS, SELF, or NO_FRIENDS (when the object can be seen by a network only).
+     * The networks field may contain a comma-separated list of network IDs that can see the object, or 1 for all of a user's network.
+     * The allow field must be specified when the friends value is set to SOME_FRIENDS and must specify a comma-separated list of user IDs and friend list IDs that 'can' see the post.
+     * The deny field may be specified if the friends field is set to SOME_FRIENDS and must specify a comma-separated list of user IDs and friend list IDs that 'cannot' see the post.
+     * Note: This privacy setting only applies to posts to the current or specified user's own Wall. Facebook ignores this setting for targeted Wall posts (when the user is writing on the Wall of a friend, Page, event, group connected to the user). Consistent with behavior on Facebook, all targeted posts are viewable by anyone who can see the target's Wall.
+     * Privacy Policy: Any non-default privacy setting must be intentionally chosen by the user
      *
      * permissions read_stream
      * @return object containing the value field and optional friends, networks, allow and deny fields.
@@ -235,6 +244,7 @@ class Post
 
     /**
      * A list of properties for an uploaded video, for example, the length of the video
+     *
      * permissions access_token
      * @return array of objects containing the name and text
      */
@@ -245,6 +255,7 @@ class Post
 
     /**
      * A URL to a Flash movie or video file to be embedded within the post
+     *
      * permissions access_token
      * @return string containing the URL
      */
@@ -254,7 +265,9 @@ class Post
     }
 
     /**
-     * Text of stories not intentionally generated by users, such as those generated when two users become friends; you must have the "Include recent activity stories" migration enabled in your app to retrieve these stories
+     * Text of stories not intentionally generated by users, such as those generated when two users become friends;
+     * you must have the "Include recent activity stories" migration enabled in your app to retrieve these stories
+     *
      * permissions read_stream
      * @return string
      */
@@ -264,7 +277,9 @@ class Post
     }
 
     /**
-     * Objects (Users, Pages, etc) tagged in a non-intentional story; you much have the "Include recent activity stories" migration enabled in your app to retrieve these tags
+     * Objects (Users, Pages, etc) tagged in a non-intentional story
+     * you much have the "Include recent activity stories" migration enabled in your app to retrieve these tags
+     *
      * permissions read_stream
      * @return object containing fields whose names are the indexes to where objects are mentioned in the message field; each field in turn is an array containing an object with id, name, offset, and length fields, where length is the length, within the message field, of the object mentioned
      */
@@ -275,6 +290,7 @@ class Post
 
     /**
      * Location and language restrictions for Page posts only
+     *
      * permissions manage_pages
      * @return object containing comma separated lists of valid country , city , region and locale
      */
@@ -285,6 +301,7 @@ class Post
 
     /**
      * Profiles mentioned or targeted in this post
+     *
      * permissions access_token
      * @return Contains in data an array of objects, each with the name and Facebook id of the user
      */
@@ -295,6 +312,7 @@ class Post
 
     /**
      * A string indicating the type for this post (including link, photo, video)
+     *
      * permissions access_token
      * @return string
      */
@@ -305,6 +323,7 @@ class Post
 
     /**
      * The time of the last comment on this post
+     *
      * permissions read_stream
      * @return string containing ISO-8601 date-time
      */

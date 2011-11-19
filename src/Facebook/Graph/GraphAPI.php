@@ -68,8 +68,10 @@ class GraphAPI
             $property->setAccessible(true);
             $methodName = 'get' . ucfirst($propertyName);
             $method = $rc->getMethod($methodName);
-            if ($object = $this->getReturnObject($method)) {
-
+            if ($returnObject = $this->getReturnObject($method)) {
+                $newObject = new $returnObject;
+                $this->mapDataToObject($value, $newObject);
+                $property->setValue($object, $newObject);
             } else {
                 $property->setValue($object, $value);
             }
@@ -96,5 +98,4 @@ class GraphAPI
         }
         return class_exists($object) ? $object : false;
     }
-    
 }

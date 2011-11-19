@@ -30,6 +30,24 @@ class GraphAPITest extends TestCommon
         $this->assertSame('\\Facebook\\Tests\\Fixtures\\Awesome', $getReturnObject->invoke($graphAPI, $method));
     }
 
+    public function testMapDataToObject()
+    {
+        $graphAPI = $this->getGraphAPI();
+        $graphAPIRC = new \ReflectionClass($graphAPI);
+        $mapDataToObject = $graphAPIRC->getMethod('mapDataToObject');
+        $mapDataToObject->setAccessible(true);
+
+        $data = array(
+            'from' => array(
+                'id' => '12345',
+                'name' => 'Karl Childers'
+            ),
+            'message' => "Mustard's good to me"
+        );
+
+
+    }
+
     protected function getGraphAPI()
     {
         return new GraphAPI($this->getFacebook());

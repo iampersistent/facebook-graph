@@ -10,23 +10,19 @@ namespace Facebook\Graph;
 class Event
 {
     private $id;
-
     private $owner;
-
     private $name;
-
     private $description;
-
     private $startTime;
     private $endTime;
     private $location;
-
     private $venue;
     private $privacy;
     private $updated_time;
 
     /**
      * The long-form description of the event
+     *
      * permissions generic access_token, user_events or friends_events
      * @return string
      */
@@ -37,6 +33,7 @@ class Event
 
     /**
      * The end time of the event, as you want it to be displayed on facebook
+     *
      * permissions generic access_token, user_events or friends_events
      * @return string containing an ISO-8601 formatted date/time or a UNIX timestamp; if it contains a time zone (not recommended), it will be converted to Pacific time before being stored and displayed
      */
@@ -47,6 +44,7 @@ class Event
 
     /**
      * The event ID
+     *
      * permissions generic access_token, user_events or friends_events
      * @return string
      */
@@ -57,6 +55,7 @@ class Event
 
     /**
      * The location for this event
+     *
      * permissions generic access_token, user_events or friends_events
      * @return string
      */
@@ -67,6 +66,7 @@ class Event
 
     /**
      * The event title
+     *
      * permissions generic access_token, user_events or friends_events
      * @return string
      */
@@ -77,8 +77,9 @@ class Event
 
     /**
      * The profile that created the event
+     *
      * permissions generic access_token, user_events or friends_events
-     * @return object containing id and name fields
+     * @return Facebook\Graph\Owner
      */
     public function getOwner()
     {
@@ -87,7 +88,7 @@ class Event
 
     /**
      * The visibility of this event
-    The visibility of this event
+     *
      * permissions generic access_token, user_events or friends_events
      * @return string containing 'OPEN', 'CLOSED', or 'SECRET'
      */
@@ -98,6 +99,7 @@ class Event
 
     /**
      * The start time of the event, as you want it to be displayed on facebook
+     *
      * permissions generic access_token, user_events or friends_events
      * @return string containing an ISO-8601 formatted date/time or a UNIX timestamp; if it contains a time zone (not recommended), it will be converted to Pacific time before being stored and displayed
      */
@@ -108,6 +110,7 @@ class Event
 
     /**
      * The last time the event was updated
+     *
      * permissions generic access_token, user_events or friends_events
      * @return string containing ISO-8601 date-time
      */
@@ -118,6 +121,7 @@ class Event
 
     /**
      * The location of this event
+     * 
      * permissions generic access_token, user_events or friends_events
      * @return object containing one or move of the following fields: street, city, state, zip, country, latitude, and longitude fields
     */

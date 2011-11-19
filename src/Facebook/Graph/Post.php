@@ -38,7 +38,7 @@ class Post
 
     /**
      * A list of available actions on the post (including commenting, liking, and an optional app-specified action)
-     * Requires access_token
+     * permissions access_token
      * @return array of objects containing the name and link
      */
     public function getActions()
@@ -48,7 +48,7 @@ class Post
 
     /**
      * Information about the application this post came from
-     * read_stream
+     * permissions read_stream
      * @return object containing the name and id of the application
      */
     public function getApplication()
@@ -58,7 +58,7 @@ class Post
 
     /**
      * The caption of the link (appears beneath the link name)
-     * Requires access_token
+     * permissions permissions access_token
      * @return string
      */
     public function getCaption()
@@ -68,7 +68,7 @@ class Post
 
     /**
      * Comments for this post
-     * read_stream
+     * permissions read_stream
      * @return Structure containing a data object containing an array of objects, each with the id, from, message, and created_time for each comment
      */
     public function getComments()
@@ -78,7 +78,7 @@ class Post
 
     /**
      * The time the post was initially published
-     * read_stream
+     * permissions read_stream
      * @return string containing ISO-8601 date-time
      */
     public function getCreatedTime()
@@ -88,7 +88,7 @@ class Post
 
     /**
      * A description of the link (appears beneath the link caption)
-     * Requires access_token
+     * permissions access_token
      * @return string
      */
     public function getDescription()
@@ -99,7 +99,7 @@ class Post
     /**
      *
      * Information about the user who posted the message
-     * Requires access_token
+     * permissions access_token
      * @returns object containing the name and Facebook id of the user who posted the message
      */
     public function getFrom()
@@ -109,7 +109,7 @@ class Post
 
     /**
      * A link to an icon representing the type of this post
-     * Requires access_token
+     * permissions access_token
      * @return string
      */
     public function getIcon()
@@ -119,7 +119,7 @@ class Post
 
     /**
      * Likes for this post
-     * Requires access_token
+     * permissions access_token
      * @return Structure containing a data object and the number of total likes, with data containing an array of objects, each with the name and Facebook id of the user who liked the post
      */
     public function getLikes()
@@ -129,7 +129,7 @@ class Post
 
     /**
      * The link attached to this post
-     * Requires access_token
+     * permissions access_token
      * @return string containing the URL
      */
     public function getLink()
@@ -139,16 +139,17 @@ class Post
 
     /**
      * The message
-     * Requires access_token
+     * permissions access_token
      * @return string
      */
     public function getMessage()
     {
         return $this->message;
     }
+
     /**
      * Objects tagged in the message (Users, Pages, etc)
-     * Requires access_token
+     * permissions access_token
      * @return object containing fields whose names are the indexes to where objects are mentioned in the message field; each field in turn is an array containing an object with id, name, offset, and length fields, where length is the length, within the message field, of the object mentioned
      */
     public function getMessageTags()
@@ -158,7 +159,7 @@ class Post
 
     /**
      * The name of the link
-     * Requires access_token
+     * permissions access_token
      * @return string
      */
     public function getName()
@@ -178,7 +179,7 @@ class Post
 
     /**
      * If available, a link to the picture included with this post
-     * Requires access_token
+     * permissions access_token
      * @return string containing the URL
      */
     public function getPicture()
@@ -188,7 +189,7 @@ class Post
 
     /**
      * Location associated with a Post, if any
-     * read_stream
+     * permissions read_stream
      * @return object containing id and name of Page associated with this location, and a location field containing geographic information such as latitude, longitude, country, and other fields (fields will vary based on geography and availability of information)
      */
     public function getPlace()
@@ -199,7 +200,7 @@ class Post
     /**
      * Return the post id
      *
-     * requires access token
+     * permissions access token
      * @return string The post ID
      */
     public function getId()
@@ -224,7 +225,7 @@ class Post
 
     Privacy Policy: Any non-default privacy setting must be intentionally chosen by the user
      *
-     * read_stream
+     * permissions read_stream
      * @return object containing the value field and optional friends, networks, allow and deny fields.
      */
     public function getPrivacy()
@@ -234,7 +235,7 @@ class Post
 
     /**
      * A list of properties for an uploaded video, for example, the length of the video
-     * Requires access_token
+     * permissions access_token
      * @return array of objects containing the name and text
      */
     public function getProperties()
@@ -244,7 +245,7 @@ class Post
 
     /**
      * A URL to a Flash movie or video file to be embedded within the post
-     * Requires access_token
+     * permissions access_token
      * @return string containing the URL
      */
     public function getSource()
@@ -254,7 +255,7 @@ class Post
 
     /**
      * Text of stories not intentionally generated by users, such as those generated when two users become friends; you must have the "Include recent activity stories" migration enabled in your app to retrieve these stories
-     * read_stream
+     * permissions read_stream
      * @return string
      */
     public function getStory()
@@ -264,7 +265,7 @@ class Post
 
     /**
      * Objects (Users, Pages, etc) tagged in a non-intentional story; you much have the "Include recent activity stories" migration enabled in your app to retrieve these tags
-     * read_stream
+     * permissions read_stream
      * @return object containing fields whose names are the indexes to where objects are mentioned in the message field; each field in turn is an array containing an object with id, name, offset, and length fields, where length is the length, within the message field, of the object mentioned
      */
     public function getStoryTags()
@@ -274,7 +275,7 @@ class Post
 
     /**
      * Location and language restrictions for Page posts only
-     * manage_pages
+     * permissions manage_pages
      * @return object containing comma separated lists of valid country , city , region and locale
      */
     public function getTargeting()
@@ -284,7 +285,7 @@ class Post
 
     /**
      * Profiles mentioned or targeted in this post
-     * @permissions Requires access_token
+     * permissions access_token
      * @return Contains in data an array of objects, each with the name and Facebook id of the user
      */
     public function getTo()
@@ -294,7 +295,7 @@ class Post
 
     /**
      * A string indicating the type for this post (including link, photo, video)
-     * Requires access_token
+     * permissions access_token
      * @return string
      */
     public function getType()
@@ -304,7 +305,7 @@ class Post
 
     /**
      * The time of the last comment on this post
-     * read_stream
+     * permissions read_stream
      * @return string containing ISO-8601 date-time
      */
     public function getUpdatedTime()

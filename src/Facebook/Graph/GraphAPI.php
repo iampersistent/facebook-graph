@@ -12,13 +12,16 @@ use Facebook\Graph\Post;
 class GraphAPI
 {
     private $facebook;
+    private $lexer;
     private $parser;
     private $reader;
 
     public function __construct($facebook)
     {
         $this->facebook = $facebook;
-        $this->parser =             new \Doctrine\Common\Annotations\DocParser();
+        $this->lexer =  new \Doctrine\Common\Annotations\DocLexer();
+        $this->parser = new \Doctrine\Common\Annotations\DocParser();
+        $this->parser->setImports(array('@return'));
 
         $this->reader = new \Doctrine\Common\Annotations\AnnotationReader(
             new \Doctrine\Common\Cache\ApcCache(),
@@ -63,15 +66,35 @@ class GraphAPI
             $propertyName = preg_replace('/_(.?)/e', "strtoupper('$1')", $field);
             $property = $rc->getProperty($propertyName);
             $property->setAccessible(true);
-            $property->setValue($object, $value);
             $methodName = 'get' . ucfirst($propertyName);
             $method = $rc->getMethod($methodName);
-            $comment = $method->getDocComment();
-            $parsed = $this->parser->parse($comment);
-            $a = 0;
+            if ($object = $this->getReturnObject($method)) {
+
+            } else {
+                $property->setValue($object, $value);
+            }
         }
         return $object;
     }
 
+    protected function getReturnObject(\ReflectionMethod $method)
+    {
+        $comment = $method->getDocComment();
+        $this->lexer->setInput($comment);
+        $object = null;
+        while ($this->lexer->moveNext() && !$object) {
+            $this->lexer->skipUntil(\Doctrine\Common\Annotations\DocLexer::T_AT);
+            $this->lexer->moveNext();
+            if ($this->lexer->lookahead['value'] == 'return') {
+                $this->lexer->moveNext();
+                $object = '\\';
+                do {
+                    $object = $object . $this->lexer->lookahead['value'];
+                    $this->lexer->moveNext();
+                } while ($this->lexer->lookahead['value'] != '/');
+            }
+        }
+        return class_exists($object) ? $object : false;
+    }
     
 }

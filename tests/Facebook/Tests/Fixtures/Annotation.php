@@ -4,7 +4,7 @@ namespace Facebook\Tests\Fixtures;
 class Annotation
 {
     /**
-     * @return My\Awesome\Class
+     * @return Facebook\Tests\Fixtures\Awesome
      */
     public function myAwesomeClass()
     {

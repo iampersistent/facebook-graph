@@ -121,7 +121,7 @@ class Event
 
     /**
      * The location of this event
-     * 
+     *
      * permissions generic access_token, user_events or friends_events
      * @return object containing one or move of the following fields: street, city, state, zip, country, latitude, and longitude fields
     */

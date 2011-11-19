@@ -12,10 +12,18 @@ use Facebook\Graph\Post;
 class GraphAPI
 {
     private $facebook;
+    private $parser;
+    private $reader;
 
     public function __construct($facebook)
     {
         $this->facebook = $facebook;
+        $this->parser =             new \Doctrine\Common\Annotations\DocParser();
+
+        $this->reader = new \Doctrine\Common\Annotations\AnnotationReader(
+            new \Doctrine\Common\Cache\ApcCache(),
+            new \Doctrine\Common\Annotations\DocParser()
+        );
     }
 
     /**
@@ -56,6 +64,11 @@ class GraphAPI
             $property = $rc->getProperty($propertyName);
             $property->setAccessible(true);
             $property->setValue($object, $value);
+            $methodName = 'get' . ucfirst($propertyName);
+            $method = $rc->getMethod($methodName);
+            $comment = $method->getDocComment();
+            $parsed = $this->parser->parse($comment);
+            $a = 0;
         }
         return $object;
     }

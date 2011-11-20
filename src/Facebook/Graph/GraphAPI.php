@@ -89,7 +89,11 @@ class GraphAPI
         $rc = new \ReflectionClass($object);
         foreach ($data as $field => $value) {
             $propertyName = preg_replace('/_(.?)/e', "strtoupper('$1')", $field);
-            $property = $rc->getProperty($propertyName);
+            try {
+                $property = $rc->getProperty($propertyName);
+            } catch (\ReflectionException $e) {
+                continue;
+            }
             $property->setAccessible(true);
             $methodName = 'get' . ucfirst($propertyName);
             $method = $rc->getMethod($methodName);

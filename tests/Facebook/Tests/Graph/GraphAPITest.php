@@ -28,6 +28,8 @@ class GraphAPITest extends TestCommon
 
         $method = $annotationRC->getMethod('myAwesomeClass');
         $this->assertSame('\\Facebook\\Tests\\Fixtures\\Awesome', $getReturnObject->invoke($graphAPI, $method));
+
+
     }
 
     public function testMapDataToObject()
@@ -53,6 +55,19 @@ class GraphAPITest extends TestCommon
         $this->assertInstanceOf('\\Facebook\\Tests\\Fixtures\\Owner', $from, 'from should be mapped as an owner object');
         $this->assertEquals('12345', $from->getId());
         $this->assertSame('Karl Childers', $from->getName());
+
+        $data = array(
+            'property' => 'does not exist',
+            'message' => 'this should be there',
+        );
+        $note = new \Facebook\Tests\Fixtures\Note();
+
+        try {
+            $mapDataToObject->invokeArgs($graphAPI, array($data, &$note));
+        } catch (\ReflectionException $e) {
+            $this->fail('a missing property in mapping should just be skipped');
+        }
+        $this->assertSame('this should be there', $note->getMessage());
     }
 
     protected function getGraphAPI()

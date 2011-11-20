@@ -98,6 +98,10 @@ class GraphAPI
             $methodName = 'get' . ucfirst($propertyName);
             $method = $rc->getMethod($methodName);
             if ($returnObject = $this->getReturnObject($method)) {
+                if ($returnObject == "\DateTime") {
+                    $property->setValue($object, new $returnObject($data[$field]));
+                    continue;
+                }
                 $newObject = new $returnObject;
                 $this->mapDataToObject($value, $newObject);
                 $property->setValue($object, $newObject);

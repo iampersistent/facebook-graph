@@ -5,6 +5,7 @@ class Note
 {
     private $from;
     private $message;
+    private $date;
 
     /**
      * @return Facebook\Tests\Fixtures\Owner
@@ -20,5 +21,13 @@ class Note
     public function getMessage()
     {
         return $this->message;
+    }
+
+    /**
+     * @return DateTime
+     */
+    public function getDate()
+    {
+        return $this->date;
     }
 }

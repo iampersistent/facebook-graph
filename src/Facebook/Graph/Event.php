@@ -35,7 +35,7 @@ class Event
      * The end time of the event, as you want it to be displayed on facebook
      *
      * permissions generic access_token, user_events or friends_events
-     * @return string containing an ISO-8601 formatted date/time or a UNIX timestamp; if it contains a time zone (not recommended), it will be converted to Pacific time before being stored and displayed
+     * @return DateTime if it contains a time zone (not recommended), it will be converted to Pacific time before being stored and displayed
      */
     public function getEndTime()
     {
@@ -101,7 +101,7 @@ class Event
      * The start time of the event, as you want it to be displayed on facebook
      *
      * permissions generic access_token, user_events or friends_events
-     * @return string containing an ISO-8601 formatted date/time or a UNIX timestamp; if it contains a time zone (not recommended), it will be converted to Pacific time before being stored and displayed
+     * @return DateTime if it contains a time zone (not recommended), it will be converted to Pacific time before being stored and displayed
      */
     public function getStartTime()
     {
@@ -112,7 +112,7 @@ class Event
      * The last time the event was updated
      *
      * permissions generic access_token, user_events or friends_events
-     * @return string containing ISO-8601 date-time
+     * @return DateTime
      */
     public function getUpdatedTime()
     {

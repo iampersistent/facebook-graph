@@ -84,7 +84,7 @@ class Post
      * The time the post was initially published
      *
      * permissions read_stream
-     * @return string containing ISO-8601 date-time
+     * @return DateTime
      */
     public function getCreatedTime()
     {
@@ -325,7 +325,7 @@ class Post
      * The time of the last comment on this post
      *
      * permissions read_stream
-     * @return string containing ISO-8601 date-time
+     * @return DateTime
      */
     public function getUpdatedTime()
     {

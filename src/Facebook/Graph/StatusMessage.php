@@ -63,7 +63,7 @@ class StatusMessage
      * The time the message was published
      *
      * permissions access_token
-     * @return string containing ISO-8601 date-time
+     * @return DateTime
      */
     public function getUpdatedTime()
     {

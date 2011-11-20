@@ -40,6 +40,7 @@ class GraphAPITest extends TestCommon
         $mapDataToObject->setAccessible(true);
 
         $data = array(
+            'date' => '2011-11-13T19:00:00',
             'from' => array(
                 'id' => '12345',
                 'name' => 'Karl Childers'
@@ -55,6 +56,7 @@ class GraphAPITest extends TestCommon
         $this->assertInstanceOf('\\Facebook\\Tests\\Fixtures\\Owner', $from, 'from should be mapped as an owner object');
         $this->assertEquals('12345', $from->getId());
         $this->assertSame('Karl Childers', $from->getName());
+        $this->assertInstanceOf('\\DateTime', $note->getDate());
 
         $data = array(
             'property' => 'does not exist',

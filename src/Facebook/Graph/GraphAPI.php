@@ -34,32 +34,41 @@ class GraphAPI
      * Fetch the events from an id page
      * 
      * @param string $facebookId the id for the page to retrieve the events
-     * @param int $limit // todo
-     * @param null $time // todo
+     * @param array querying parameters
+     *        - limit
+     *        - offset
+     *        - since (a unix timestamp or any date accepted by strtotime)
+     *        - until (a unix timestamp or any date accepted by strtotime)
+     *
      * @return array of Facebook\Graph\Event
      */
-    public function fetchEvents($facebookId, $limit = 10, $time = null)
+    public function fetchEvents($facebookId, $parameters = array())
     {
-        $api = sprintf('/%s/events', $facebookId); // limit ?
-        return $this->fetchData($api, 'Facebook\\Graph\\Event', $limit, $time);
+        $api = sprintf('/%s/events', $facebookId);
+        return $this->fetchData($api, 'Facebook\\Graph\\Event', $parameters);
     }
 
     /**
      * Fetch the posts from an id page
      *
      * @param string $facebookId the id for the page to retrieve the posts
-     * @param int $limit // todo
-     * @param null $time // todo
+     * @param array querying parameters
+     *        - limit defaults to 10
+     *        - offset
+     *        - since (a unix timestamp or any date accepted by strtotime) defaults to "-1 day"
+     *        - until (a unix timestamp or any date accepted by strtotime)
      * @return array of Facebook\Graph\Post
      */
-    public function fetchPosts($facebookId, $limit = 10, $time = null)
+    public function fetchPosts($facebookId, $parameters = array())
     {
-        $api = sprintf('/%s/posts', $facebookId); // limit ?
-        return $this->fetchData($api, 'Facebook\\Graph\\Post', $limit, $time);
+        $api = sprintf('/%s/posts', $facebookId);
+        return $this->fetchData($api, 'Facebook\\Graph\\Post', $parameters);
     }
 
-    protected function fetchData($api, $objectClass, $limit = 10, $time = null)
+    protected function fetchData($api, $objectClass, $parameters)
     {
+        $parameters = array_merge(array('limit' => 10, 'since' => '-1 week'), $parameters);
+        $api = $api . '?' . http_build_query($parameters);
         try {
             $raw = $this->facebook->api($api);
         } catch (\FacebookApiException $e) {
@@ -68,12 +77,8 @@ class GraphAPI
 
         $objects = array();
         foreach ($raw['data'] as $data) {
-            if (!$limit) {
-                break;
-            }
             $object = new $objectClass();
             $objects[] = $this->mapDataToObject($data, $object);
-            $limit--;
         }
 
         return $objects;

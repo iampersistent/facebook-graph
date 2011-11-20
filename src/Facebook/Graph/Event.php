@@ -18,7 +18,7 @@ class Event
     private $location;
     private $venue;
     private $privacy;
-    private $updated_time;
+    private $updatedTime;
 
     /**
      * The long-form description of the event
@@ -39,7 +39,7 @@ class Event
      */
     public function getEndTime()
     {
-        return $this->end_time;
+        return $this->endTime;
     }
 
     /**
@@ -116,7 +116,7 @@ class Event
      */
     public function getUpdatedTime()
     {
-        return $this->updated_time;
+        return $this->updatedTime;
     }
 
     /**

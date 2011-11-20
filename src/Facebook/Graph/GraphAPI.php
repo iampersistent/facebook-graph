@@ -4,6 +4,7 @@
  */
 namespace Facebook\Graph;
 
+use Facebook\Graph\Event;
 use Facebook\Graph\Post;
 
 /**
@@ -30,33 +31,52 @@ class GraphAPI
     }
 
     /**
-     * Fetch the posts from an id page
+     * Fetch the events from an id page
      * 
+     * @param string $facebookId the id for the page to retrieve the events
+     * @param int $limit // todo
+     * @param null $time // todo
+     * @return array of Facebook\Graph\Event
+     */
+    public function fetchEvents($facebookId, $limit = 10, $time = null)
+    {
+        $api = sprintf('/%s/events', $facebookId); // limit ?
+        return $this->fetchData($api, 'Facebook\\Graph\\Event', $limit, $time);
+    }
+
+    /**
+     * Fetch the posts from an id page
+     *
      * @param string $facebookId the id for the page to retrieve the posts
      * @param int $limit // todo
      * @param null $time // todo
-     * @return array of IamPersistent\FacebookGraphBundle\Facebook\Post
+     * @return array of Facebook\Graph\Post
      */
     public function fetchPosts($facebookId, $limit = 10, $time = null)
     {
+        $api = sprintf('/%s/posts', $facebookId); // limit ?
+        return $this->fetchData($api, 'Facebook\\Graph\\Post', $limit, $time);
+    }
+
+    protected function fetchData($api, $objectClass, $limit = 10, $time = null)
+    {
         try {
-            $api = sprintf('/%s/posts', $facebookId); // limit ?
             $raw = $this->facebook->api($api);
         } catch (\FacebookApiException $e) {
             return array();
         }
 
-        $posts = array();
+        $objects = array();
         foreach ($raw['data'] as $data) {
             if (!$limit) {
                 break;
             }
-            $post = new Post();
-            $posts[] = $this->mapDataToObject($data, $post);
+            $object = new $objectClass();
+            $objects[] = $this->mapDataToObject($data, $object);
             $limit--;
         }
 
-        return $posts;
+        return $objects;
     }
 
     protected function mapDataToObject($data, &$object)

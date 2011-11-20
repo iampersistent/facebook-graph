@@ -6,3 +6,6 @@ php:
 
 before_script:
     -  git submodule update --init
+
+script:
+  phpunit --configuration phpunit.xml.dist

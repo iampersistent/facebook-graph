@@ -30,11 +30,11 @@ class GraphAPI
     }
 
     /**
-     * Fetch the post
+     * Fetch the posts from an id page
      * 
-     * @param $facebookId
-     * @param int $limit
-     * @param null $time
+     * @param string $facebookId the id for the page to retrieve the posts
+     * @param int $limit // todo
+     * @param null $time // todo
      * @return array of IamPersistent\FacebookGraphBundle\Facebook\Post
      */
     public function fetchPosts($facebookId, $limit = 10, $time = null)

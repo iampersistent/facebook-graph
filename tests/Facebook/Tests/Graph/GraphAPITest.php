@@ -42,10 +42,17 @@ class GraphAPITest extends TestCommon
                 'id' => '12345',
                 'name' => 'Karl Childers'
             ),
-            'message' => "Mustard's good to me"
+            'message' => "Mustard's good to me",
         );
 
+        $note = new \Facebook\Tests\Fixtures\Note();
+        $mapDataToObject->invokeArgs($graphAPI, array($data, &$note));
 
+        $this->assertSame("Mustard's good to me", $note->getMessage(), 'the message should be mapped as a string');
+        $from = $note->getFrom();
+        $this->assertInstanceOf('\\Facebook\\Tests\\Fixtures\\Owner', $from, 'from should be mapped as an owner object');
+        $this->assertEquals('12345', $from->getId());
+        $this->assertSame('Karl Childers', $from->getName());
     }
 
     protected function getGraphAPI()

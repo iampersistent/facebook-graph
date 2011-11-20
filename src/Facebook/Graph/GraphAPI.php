@@ -6,6 +6,7 @@ namespace Facebook\Graph;
 
 use Facebook\Graph\Event;
 use Facebook\Graph\Post;
+use Facebook\Graph\User;
 
 /**
  * @author Richard Shank <develop@zestic.com>
@@ -65,6 +66,24 @@ class GraphAPI
         return $this->fetchData($api, 'Facebook\\Graph\\Post', $parameters);
     }
 
+    /**
+     * Fetch the user from an id
+     *
+     * @param string $facebookId the id for the page to retrieve the posts
+     * @return array of Facebook\Graph\User
+     */
+    public function fetchUser($facebookId)
+    {
+        $api = sprintf('/%s', $facebookId);
+        try {
+            $data = $this->facebook->api($api);
+        } catch (\FacebookApiException $e) {
+            return array();
+        }
+
+        return $this->mapDataToObject($data, new User());
+    }
+
     protected function fetchData($api, $objectClass, $parameters)
     {
         $parameters = array_merge(array('limit' => 10, 'since' => '-1 week'), $parameters);
@@ -98,7 +117,7 @@ class GraphAPI
             $methodName = 'get' . ucfirst($propertyName);
             $method = $rc->getMethod($methodName);
             if ($returnObject = $this->getReturnObject($method)) {
-                if ($returnObject == "\DateTime") {
+                if ($returnObject == "\\DateTime") {
                     $property->setValue($object, new $returnObject($data[$field]));
                     continue;
                 }

@@ -26,6 +26,7 @@ Use GraphAPI to retrieve data from Facebook and return that data in objects.
 ### Todo
 
  * Add functional tests for fetch*() functions
+ * Add methods to api to write
  * Create classes for the following Facebook objects
     * Achievement(Instance)
     * Album

@@ -72,18 +72,32 @@ class GraphAPITest extends TestCommon
         $this->assertSame('this should be there', $note->getMessage());
     }
 
-    public function testFindObjectFromUrl($url)
+    public function testFindObjectFromUrl()
     {
-        $this->assert('just passing in an id should find the id data');
-        $this->assert('just passing in a username should find the id data');
-        $this->assert('passing in a full username url should find the id data');
-        $this->assert('just passing in a profile.php?id=1377008931 should find the id data');
-        $this->assert('passing in a full profile.php?id=1377008931 url should find the id data');
-        $this->assert('just passing in pages/irrelevant/153643058005174 should find the eight53 data');
-        $this->assert('passing in a full pages/irrelevant/153643058005174 should find the eight53 data');
-        $this->assert('return a user object for this');
-        $this->assert('return a page object for this');
-        $this->assert('return an event object for this');  events/255612394496354/
+        $api = $this->getGraphAPI();
+
+        $eight53 = $api->findObjectFromUrl('153643058005174');
+        $this->assertSame($eight53->getId(), 'just passing in an id should find the id data');
+        $this->assertInstanceOf('\\Facebook\\Graph\\Page', $eight53, 'return a page object for this');
+
+        $eight53 = $api->findObjectFromUrl('eight53');
+        $this->assertSame($eight53->getId(), 'just passing in a username should find the id data');
+
+        $eight53 = $api->findObjectFromUrl('www.facebook.com/eight53');
+        $this->assertSame($eight53->getId(), 'passing in a full username url should find the id data');
+
+        $iampersistent = $api->findObjectFromUrl('profile.php?id=1377008931');
+        $this->assertSame($iampersistent->getId(), 'just passing in a profile.php?id=1377008931 should find the id data');
+        $this->assertInstanceOf('\\Facebook\\Graph\\User', $iampersistent, 'return a user object for this');
+
+        $iampersistent = $api->findObjectFromUrl('http://facebook.com/profile.php?id=1377008931');
+        $this->assertSame($iampersistent->getId(), 'passing in a full profile.php?id=1377008931 url should find the id data');
+
+        $eight53 = $api->findObjectFromUrl('pages/irrelevant/153643058005174');
+        $this->assertSame($eight53->getId(), 'just passing in pages/irrelevant/153643058005174 should find the eight53 data');
+
+        $eight53 = $api->findObjectFromUrl('facebook.com/pages/irrelevant/153643058005174');
+        $this->assertSame($eight53->getId(), 'passing in a full pages/irrelevant/153643058005174 should find the eight53 data');
     }
 
     protected function getGraphAPI()

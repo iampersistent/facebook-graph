@@ -33,7 +33,7 @@ class GraphAPI
 
     /**
      * Fetch the events from an id page
-     * 
+     *
      * @param string $facebookId the id for the page to retrieve the events
      * @param array querying parameters
      *        - limit
@@ -82,6 +82,18 @@ class GraphAPI
         }
 
         return $this->mapDataToObject($data, new User());
+    }
+
+    /**
+     * Return an object for a url, even if its just the username or id that is passed in
+     *
+     * @param $url string
+     *
+     * @return object based on type
+     */
+    public function findObjectFromUrl($url)
+    {
+
     }
 
     protected function fetchData($api, $objectClass, $parameters)

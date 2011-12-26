@@ -72,6 +72,20 @@ class GraphAPITest extends TestCommon
         $this->assertSame('this should be there', $note->getMessage());
     }
 
+    public function testFindObjectFromUrl($url)
+    {
+        $this->assert('just passing in an id should find the id data');
+        $this->assert('just passing in a username should find the id data');
+        $this->assert('passing in a full username url should find the id data');
+        $this->assert('just passing in a profile.php?id=1377008931 should find the id data');
+        $this->assert('passing in a full profile.php?id=1377008931 url should find the id data');
+        $this->assert('just passing in pages/irrelevant/153643058005174 should find the eight53 data');
+        $this->assert('passing in a full pages/irrelevant/153643058005174 should find the eight53 data');
+        $this->assert('return a user object for this');
+        $this->assert('return a page object for this');
+        $this->assert('return an event object for this');  events/255612394496354/
+    }
+
     protected function getGraphAPI()
     {
         return new GraphAPI($this->getFacebook());

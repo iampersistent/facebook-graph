@@ -117,6 +117,9 @@ class GraphAPITest extends TestCommon
         $this->assertSame('153643058005174', $eight53['id'], 'passing in a full pages/irrelevant/153643058005174 should find the eight53 data');
         // todo:
         // $this->assertSame($eight53->getId(), 'passing in a full pages/irrelevant/153643058005174 should find the eight53 data');
+
+        $nothing = $api->findObjectFromUrl('there-is-no-way-in-hell-someone-has-this-as-a-username');
+        $this->assertNull($nothing, 'bogus data should return null');
     }
 
     protected function getGraphAPI()

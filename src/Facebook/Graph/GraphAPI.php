@@ -111,9 +111,19 @@ class GraphAPI
             $id = substr($url, $inThere);
         }
         $id = trim($id, '/');
-        $raw = $this->facebook->api($id);
+        try {
+            $raw = $this->facebook->api($id);
+        } catch (\FacebookApiException $e) {
 
+            return null;
+        }
+
+        if (!isset($raw['link'])) {
+            $username = isset($raw['username']) ? $raw['username'] : $raw['id'];
+            $raw['link'] = 'http://www.facebook.com/' . $username;
+        }
         return $raw;
+
         // todo: actually map this to an object, for now, just passing back the raw data
         // $objectClass = '\\Facebook\\Graph\\' . ucfirst(strtolower($raw['type']));
         // $object = new $objectClass();

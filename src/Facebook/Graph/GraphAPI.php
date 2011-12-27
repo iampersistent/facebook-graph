@@ -93,7 +93,32 @@ class GraphAPI
      */
     public function findObjectFromUrl($url)
     {
+        $url = strtolower($url);
+        $parsed = parse_url($url);
+        $id = $parsed['path'];
+        if (isset($parsed['fragment'])) {
+            $id = $parsed['fragment'];
+        }
+        if (isset($parsed['query'])) {
+            $inThere = strrpos($parsed['query'], '=');
+            $id = substr($parsed['query'], $inThere + 1);
+        }
+        if ($url === $parsed['path'] && $inThere = strpos($url, 'facebook.com')) {
+            $id = substr($url, $inThere + 12);
+        }
+        if (strpos($parsed['path'], 'pages') !== false) {
+            $inThere = strrpos($url, '/');
+            $id = substr($url, $inThere);
+        }
+        $id = trim($id, '/');
+        $raw = $this->facebook->api($id);
 
+        return $raw;
+        // todo: actually map this to an object, for now, just passing back the raw data
+        // $objectClass = '\\Facebook\\Graph\\' . ucfirst(strtolower($raw['type']));
+        // $object = new $objectClass();
+
+        //return $this->mapDataToObject($raw, $object);
     }
 
     protected function fetchData($api, $objectClass, $parameters)

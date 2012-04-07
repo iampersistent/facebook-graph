@@ -1,5 +1,5 @@
 {
-    "name": "IamPersistent/facebook-graph",
+    "name": "iampersistent/facebook-graph",
     "description": "Namespaced interface and classes for Facebook Graph API",
     "keywords": ["facebook", "graph", "api"],
     "homepage": "https://github.com/IamPersistent/facebook-graph",

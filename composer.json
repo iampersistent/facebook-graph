@@ -2,13 +2,13 @@
     "name": "iampersistent/facebook-graph",
     "description": "Namespaced interface and classes for Facebook Graph API",
     "keywords": ["facebook", "graph", "api"],
-    "homepage": "https://github.com/IamPersistent/facebook-graph",
+    "homepage": "https://github.com/iampersistent/facebook-graph",
     "type": "library",
     "license": "MIT",
     "authors": [
         {
             "name": "Richard Shank",
-            "homepage": "https://github.com/IamPersistent/facebook-graph/contributors"
+            "homepage": "https://github.com/iampersistent/facebook-graph/contributors"
         }
     ],
     "require": {

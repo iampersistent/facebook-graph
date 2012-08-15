@@ -9,7 +9,7 @@
          processIsolation="false"
          stopOnFailure="false"
          syntaxCheck="false"
-         bootstrap="./tests/Facebook/Tests/TestInit.php"
+         bootstrap="tests/bootstrap.php"
 >
 
     <testsuites>

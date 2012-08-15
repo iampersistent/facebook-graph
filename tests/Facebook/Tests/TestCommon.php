@@ -4,8 +4,6 @@
  */
 namespace Facebook\Tests;
 
-require_once __DIR__.'/../../../src/vendor/facebook-php-sdk/src/facebook.php';
-
 /**
  * @author Richard Shank <develop@zestic.com>
  */

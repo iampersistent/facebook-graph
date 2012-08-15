@@ -1,6 +1,0 @@
-[submodule "src/vendor/doctrine-common"]
-	path = src/vendor/doctrine-common
-	url = https://github.com/doctrine/common.git
-[submodule "src/vendor/facebook-php-sdk"]
-	path = src/vendor/facebook-php-sdk
-	url = https://github.com/facebook/php-sdk.git

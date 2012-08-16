@@ -28,8 +28,6 @@ class GraphAPITest extends TestCommon
 
         $method = $annotationRC->getMethod('myAwesomeClass');
         $this->assertSame('\\Facebook\\Tests\\Fixtures\\Awesome', $getReturnObject->invoke($graphAPI, $method));
-
-
     }
 
     public function testMapDataToObject()
@@ -72,9 +70,12 @@ class GraphAPITest extends TestCommon
         $this->assertSame('this should be there', $note->getMessage());
     }
 
+    /**
+     * @runInSeparateProcess
+     */
     public function testFindObjectFromUrl()
     {
-        $api = $this->getGraphAPI();
+        $api = $this->getGraphAPI($this->getFacebook());
 
         $eight53 = $api->findObjectFromUrl('153643058005174');
         $this->assertSame('153643058005174', $eight53['id'], 'just passing in an id should find the id data');
@@ -122,8 +123,14 @@ class GraphAPITest extends TestCommon
         $this->assertNull($nothing, 'bogus data should return null');
     }
 
-    protected function getGraphAPI()
+    protected function getGraphAPI($facebook = null)
     {
-        return new GraphAPI($this->getFacebook());
+        if (!$facebook) {
+            $facebook =  $this->getMockBuilder('Facebook')
+                ->disableOriginalConstructor()
+                ->getMock();
+        }
+
+        return new GraphAPI($facebook);
     }
 }

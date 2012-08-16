@@ -1,6 +1,6 @@
 # Facebook Graph API
 
-[![Build Status](https://secure.travis-ci.org/IamPersistent/facebook-graph.png)](http://travis-ci.org/IamPersistent/facebook-graph)
+[![Build Status](https://secure.travis-ci.org/iampersistent/facebook-graph.png?branch=master)](http://travis-ci.org/iampersistent/facebook-graph)
 
 Use GraphAPI to retrieve data from Facebook and return that data in objects.
 

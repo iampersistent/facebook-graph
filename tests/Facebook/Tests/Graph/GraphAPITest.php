@@ -28,7 +28,7 @@ class GraphAPITest extends TestCommon
         $facebook =  $this->getMockBuilder('Facebook')
             ->disableOriginalConstructor()
             ->getMock();
-        $dataSet = ['first_name' => 'First', 'last_name' => 'Last'];
+        $dataSet = array('first_name' => 'First', 'last_name' => 'Last');
         $facebook->expects($this->any())
             ->method('api')
             ->will($this->returnValue($dataSet));

@@ -13,6 +13,34 @@ use Doctrine\Common\Annotations\DocParser;
  */
 class GraphAPITest extends TestCommon
 {
+    public function testFetchMe()
+    {
+        $facebook =  $this->getMockBuilder('Facebook')
+            ->disableOriginalConstructor()
+            ->getMock();
+        $facebook->expects($this->any())
+            ->method('api')
+            ->will($this->throwException(new \FacebookApiException(array())));
+        $graphAPI = $this->getGraphAPI($facebook);
+
+        $this->assertNull($graphAPI->fetchMe(), 'null should be returned if the user is not authenticated');
+
+        $facebook =  $this->getMockBuilder('Facebook')
+            ->disableOriginalConstructor()
+            ->getMock();
+        $dataSet = ['first_name' => 'First', 'last_name' => 'Last'];
+        $facebook->expects($this->any())
+            ->method('api')
+            ->will($this->returnValue($dataSet));
+
+        $graphAPI = $this->getGraphAPI($facebook);
+
+        $me = $graphAPI->fetchMe();
+        $this->assertInstanceOf('\Facebook\Graph\User', $me, 'a graphAPI user object should be returned');
+        $this->assertSame('First', $me->getFirstName());
+        $this->assertSame('Last', $me->getLastName());
+    }
+
     public function testFetchReturnClass()
     {
         $graphAPI = $this->getGraphAPI();

@@ -20,6 +20,7 @@ class GraphAPI
 
     public function __construct($facebook)
     {
+        /** @var \Facebook facebook */
         $this->facebook = $facebook;
         $this->lexer =  new \Doctrine\Common\Annotations\DocLexer();
         $this->parser = new \Doctrine\Common\Annotations\DocParser();
@@ -47,6 +48,30 @@ class GraphAPI
     {
         $api = sprintf('/%s/events', $facebookId);
         return $this->fetchData($api, 'Facebook\\Graph\\Event', $parameters);
+    }
+
+    /**
+     * Fetch the currently authenticated user. Return null if there isn't an authenticated user
+     *
+     * @return \Facebook\Graph\User | null
+     */
+    public function fetchMe()
+    {
+ /*
+        $userId = $this->facebook->getUser();
+        if ($userId === 0) {
+            return null;
+        }
+
+        return $this->fetchUser($userId);
+*/
+        try {
+            $data = $this->facebook->api('/me');
+        } catch (\FacebookApiException $e) {
+            return null;
+        }
+
+        return $this->mapDataToObject($data, new User());
     }
 
     /**

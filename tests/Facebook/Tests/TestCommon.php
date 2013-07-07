@@ -11,7 +11,10 @@ namespace Facebook\Tests;
 class TestCommon extends \PHPUnit_Framework_TestCase
 {
     const APP_ID = '117743971608120';
-    const SECRET = '943716006e74d9b9283d4d5d8ab93204';
+    const SECRET = '9c8ea2071859659bea1246d33a9207cf';
+
+    const TEST_USER   = 499834690;
+    const TEST_USER_2 = 499835484;
 
     protected $facebook;
 
